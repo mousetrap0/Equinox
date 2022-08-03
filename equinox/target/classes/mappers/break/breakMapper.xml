@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--<mapper namespace="com.board.mappers.board">  -->
+<mapper namespace="breakMapper">
+
+  <insert id="insert">
+	   INSERT INTO BREAK_MASTER(      
+	            LINE_ID, 
+		        BREAK_TIME, 
+		        NOTIFY_TIME,
+		        NOTIFY_TIME_TO_KT,
+		        RECOVERY_TIME,
+		        BREAK_POINT,
+		        ACTUAL_REPORT_YN,
+		        REMARK,
+		        CREATE_USER,
+		        CREATE_TIME,
+		        UPDATE_USER,
+		        UPDATE_TIME )
+	                 VALUES(   #{lineId}
+	                 		  , #{breakTime}
+	                 		  , #{notifyTime} 
+	                 		  , #{notifyTimeToKt}
+	                 		  , #{recoveryTime}
+	                 		  , #{breakPoint}
+	                 		  , #{actualReportYn}
+	                 		  , #{remark}
+	                 		  , #{createUser}
+	                 		  , #{createTime}
+	                 		  , #{updateUser}
+	                 		  , #{updateTime} )
+   
+   </insert>
+   
+   
+<select id="listPage" resultType="kr.co.vo.BreakVO" parameterType="kr.co.vo.SearchCriteria">
+SELECT  BREAK_ID, 
+		        LINE_ID, 
+		        BREAK_TIME, 
+		        NOTIFY_TIME,
+		        NOTIFY_TO_KT_YN,
+		        RECOVERY_TIME,
+		        BREAK_POINT,
+		        ACTUAL_REPORT_YN,
+		        REMARK,
+		        CREATE_USER,
+		        CREATE_TIME,
+		        UPDATE_USER,
+		        UPDATE_TIME
+		 FROM ( 
+		        SELECT BREAK_ID, 
+		        LINE_ID, 
+		        BREAK_TIME, 
+		        NOTIFY_TIME,
+		        NOTIFY_TO_KT_YN,
+		        RECOVERY_TIME,
+		        BREAK_POINT,
+		        ACTUAL_REPORT_YN,
+		        REMARK,
+		        CREATE_USER,
+		        CREATE_TIME,
+		        UPDATE_USER,
+		        UPDATE_TIME, 
+		        ROW_NUMBER() OVER(ORDER BY BREAK_ID DESC) AS RNUM
+		         FROM BREAK_MASTER
+		         WHERE 1=1 
+		         <!--  	<include refid="search"></include>-->
+		                       ) BREAK
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY BREAK_ID DESC
+	</select>
+	
+	<select id="listCount" parameterType="kr.co.vo.SearchCriteria" resultType="int">
+		SELECT COUNT(BREAK_ID)
+		   FROM BREAK_MASTER
+		   WHERE 1=1
+		<include refid="search"></include>	
+		   AND BREAK_ID > 0
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">AND TITLE LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND CONTENT LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND WRITER LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT LIKE '%' || #{keyword} || '%')</if>
+		</if>
+	</sql>
+   
+   
+   	<select id="read" parameterType="int" resultType="kr.co.vo.BreakVO">
+		SELECT	BREAK_ID
+			  , LINE_ID
+			  , BREAK_TIME
+			  , NOTIFY_TIME
+			  , NOTIFY_TIME_TO_KT
+			  , RECOVERY_TIME
+			  , BREAK_POINT
+			  , ACTUAL_REPORT_YN
+			  , REMARK
+			  , CREATE_USER
+			  , CREATE_TIME
+			  , UPDATE_USER
+			  , UPDATE_TIME
+		 FROM BREAK_MASTER
+		 WHERE BREAK_ID = #{breakId}
+	</select>
+	
+	
+	<update id="update" parameterType="kr.co.vo.BreakVO">
+		UPDATE BREAK_MASTER
+		   SET(      
+	            LINE_ID, 
+		        BREAK_TIME, 
+		        NOTIFY_TIME,
+		        NOTIFY_TIME_TO_KT,
+		        RECOVERY_TIME,
+		        BREAK_POINT,
+		        ACTUAL_REPORT_YN,
+		        REMARK,
+		        CREATE_USER,
+		        CREATE_TIME,
+		        UPDATE_USER,
+		        UPDATE_TIME )
+	      VALUES(   #{lineId}
+	                 		  , #{breakTime}
+	                 		  , #{notifyTime} 
+	                 		  , #{notifyTimeToKt}
+	                 		  , #{recoveryTime}
+	                 		  , #{breakPoint}
+	                 		  , #{actualReportYn}
+	                 		  , #{remark}
+	                 		  , #{createUser}
+	                 		  , #{createTime}
+	                 		  , #{updateUser}
+	                 		  , #{updateTime} )
+		 WHERE BREAK_ID = #{breakId} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE 
+		  FROM BREAK_MASTER
+		 WHERE BREAK_ID = #{breakId}
+	</delete>
+	
+   </mapper>
