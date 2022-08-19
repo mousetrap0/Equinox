@@ -8,18 +8,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.service.BreakService;
-import kr.co.vo.BoardVO;
 import kr.co.vo.BreakVO;
 import kr.co.vo.PageMaker;
 import kr.co.vo.SearchCriteria;
 
 @Controller
 @RequestMapping("/break/*")
+@CrossOrigin(origins = "http://localhost:3000")
 public class BreakController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BreakController.class);

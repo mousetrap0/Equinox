@@ -12,14 +12,14 @@
 			
 			$(".cancel_btn").on("click", function(){
 				event.preventDefault();
-				location.href = "/board/list";
+				location.href = "/break/list";
 			})
 			
 			$(".update_btn").on("click", function(){
 				if(fn_valiChk()){
 					return false;
 				}
-				formObj.attr("action", "/board/update");
+				formObj.attr("action", "/break/update");
 				formObj.attr("method", "post");
 				formObj.submit();
 			})
@@ -50,28 +50,28 @@
 			
 			<section id="container">
 				<form name="updateForm" role="form" method="post" action="/board/update">
-					<input type="hidden" name="bno" value="${update.bno}" readonly="readonly"/>
+					<input type="hidden" name="breakId" value="${update.breakId}" readonly="readonly"/>
 					<table>
 						<tbody>
 							<tr>
 								<td>
-									<label for="title">제목</label><input type="text" id="title" name="title" value="${update.title}" class="chk" title="제목을 입력하세요."/>
+									<label for="lineId">제목</label><input type="text" id="lineId" name="title" value="${update.lineId}" class="chk" title="제목을 입력하세요."/>
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="content">내용</label><textarea id="content" name="content" class="chk" title="내용을 입력하세요."><c:out value="${update.content}" /></textarea>
+									<label for="notifyTime">내용</label><textarea id="notifyTime" name="notifyTime" class="chk" title="내용을 입력하세요."><c:out value="${update.notifyTime}" /></textarea>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<label for="writer">작성자</label><input type="text" id="writer" name="writer" value="${update.writer}" readonly="readonly"/>
+									<label for="createUser">작성자</label><input type="text" id="createUser" name="createUser" value="${update.createUser}" readonly="readonly"/>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<label for="regdate">작성날짜</label>
-									<fmt:formatDate value="${update.regdate}" pattern="yyyy-MM-dd"/>					
+									<label for="createTime">작성날짜</label>
+									<fmt:formatDate value="${update.createTime}" pattern="yyyy-MM-dd"/>					
 								</td>
 							</tr>		
 						</tbody>			

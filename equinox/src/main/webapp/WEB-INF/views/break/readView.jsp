@@ -13,7 +13,7 @@
 			
 			// 수정 
 			$(".update_btn").on("click", function(){
-				formObj.attr("action", "/board/updateView");
+				formObj.attr("action", "/break/updateView");
 				formObj.attr("method", "get");
 				formObj.submit();				
 			})
@@ -24,7 +24,7 @@
 				var deleteYN = confirm("삭제하시겠습니가?");
 				if(deleteYN == true){
 					
-				formObj.attr("action", "/board/delete");
+				formObj.attr("action", "/break/delete");
 				formObj.attr("method", "post");
 				formObj.submit();
 					
@@ -34,7 +34,7 @@
 			// 취소
 			$(".list_btn").on("click", function(){
 				
-				location.href = "/board/list";
+				location.href = "/break/list";
 			})
 		})
 	</script>
@@ -53,29 +53,29 @@
 			
 			<section id="container">
 				<form name="readForm" role="form" method="post">
-					<input type="hidden" id="bno" name="bno" value="${read.bno}" />
+					<input type="hidden" id="breakId" name="breakId" value="${read.breakId}" />
 				</form>
 				<table>
 					<tbody>
 						<tr>
 							<td>
-								<label for="title">제목</label><input type="text" id="title" name="title" value="${read.title}" readonly="readonly" />
+								<label for="lineId">Line_ID</label><input type="text" id="lineId" name="lineId" value="${read.lineId}" readonly="readonly" />
 							</td>
 						</tr>	
 						<tr>
 							<td>
-								<label for="content">내용</label><textarea id="content" name="content" readonly="readonly"><c:out value="${read.content}" /></textarea>
+								<label for="notifyTime">Notify_Time</label><textarea id="notifyTime" name="notifyTime" readonly="readonly"><c:out value="${read.notifyTime}" /></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<label for="writer">작성자</label><input type="text" id="writer" name="writer" value="${read.writer}"  readonly="readonly"/>
+								<label for="createUser">작성자</label><input type="text" id="createUser" name="createUser" value="${read.createUser}"  readonly="readonly"/>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<label for="regdate">작성날짜</label>
-								<fmt:formatDate value="${read.regdate}" pattern="yyyy-MM-dd" />					
+								<label for="createTime">작성날짜</label>
+								<fmt:formatDate value="${read.createTime}" pattern="yyyy-MM-dd" />					
 							</td>
 						</tr>		
 					</tbody>			

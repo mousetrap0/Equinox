@@ -10,7 +10,7 @@
 	            LINE_ID, 
 		        BREAK_TIME, 
 		        NOTIFY_TIME,
-		        NOTIFY_TIME_TO_KT,
+		        NOTIFY_TO_KT_YN,
 		        RECOVERY_TIME,
 		        BREAK_POINT,
 		        ACTUAL_REPORT_YN,
@@ -22,7 +22,7 @@
 	                 VALUES(   #{lineId}
 	                 		  , #{breakTime}
 	                 		  , #{notifyTime} 
-	                 		  , #{notifyTimeToKt}
+	                 		  , #{notifyToKtYn}
 	                 		  , #{recoveryTime}
 	                 		  , #{breakPoint}
 	                 		  , #{actualReportYn}
@@ -95,7 +95,7 @@ SELECT  BREAK_ID,
 			  , LINE_ID
 			  , BREAK_TIME
 			  , NOTIFY_TIME
-			  , NOTIFY_TIME_TO_KT
+			  , NOTIFY_TO_KT_YN
 			  , RECOVERY_TIME
 			  , BREAK_POINT
 			  , ACTUAL_REPORT_YN
@@ -115,7 +115,7 @@ SELECT  BREAK_ID,
 	            LINE_ID, 
 		        BREAK_TIME, 
 		        NOTIFY_TIME,
-		        NOTIFY_TIME_TO_KT,
+		        NOTIFY_TO_KT_YN,
 		        RECOVERY_TIME,
 		        BREAK_POINT,
 		        ACTUAL_REPORT_YN,
@@ -127,7 +127,7 @@ SELECT  BREAK_ID,
 	      VALUES(   #{lineId}
 	                 		  , #{breakTime}
 	                 		  , #{notifyTime} 
-	                 		  , #{notifyTimeToKt}
+	                 		  , #{notifyToKtYn}
 	                 		  , #{recoveryTime}
 	                 		  , #{breakPoint}
 	                 		  , #{actualReportYn}

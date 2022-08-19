@@ -25,10 +25,17 @@
 						<tr>
 						<th>Break ID</th>
 						<th>Line ID</th>
+						<th>Notify Time</th>
+						<th>Notify To Kt Yn</th>
+						<th>Break Point</th>
 						<th>Break Time</th>
 						<th>Recovery Time</th>
+						<th>Remark</th>
+						<th>Actual Report Yn</th>
 						<th>Create User</th>
 						<th>Create Time</th>
+						<th>Update Time</th>
+						<th>Update User</th>
 						</tr>
 						
 						<c:forEach items="${list}" var = "list">
